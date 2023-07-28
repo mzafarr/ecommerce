@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Product from "./Product";
 import { laptops } from "./data";
 import Search from "./Search";
 import Sort from "./Sort";
-// "M1 Chip 8GB 256GB SSD 13.3 Retina IPS LED Display With True Tone Backlit Magic Keyboard & TouchID & Force Touch TrackPad (Space Grey, 2020)",
 
 const Laptop = () => {
   const [search, setSearch] = useState("");
   const [searchOption, setSearchOption] = useState("");
   const [filteredLaptops, setFilteredLaptops] = useState(laptops);
   const [sortOption, setSortOption] = useState("");
+
 
   function handleSearch() {
     switch (searchOption) {
@@ -52,25 +52,25 @@ const Laptop = () => {
     const priceA = parseInt(a.price.replace(/[^\d]/g, ""), 10);
     const priceB = parseInt(b.price.replace(/[^\d]/g, ""), 10);
 
-    return priceA - priceB;
+    return priceB - priceA;
   }
   function handleSort() {
     if (sortOption == "A") {
       filteredLaptops.sort(compareByPriceAsc);
     } else if (sortOption == "D") {
-        filteredLaptops.sort(compareByPriceDesc);
+      filteredLaptops.sort(compareByPriceDesc);
     }
   }
-  useEffect(() => {
+  if (sortOption != "") {
     handleSort();
-  }, [sortOption]);
+  }
 
   useEffect(() => {
     handleSearch();
   }, [search, searchOption]);
   return (
-    <div className="px-4">
-      <h1 className="text-4xl font-semibold py-4 text-center">Laptops</h1>
+    <div className="px-4 py-6">
+      <h1 className="text-6xl font-semibold text-center py-6">Laptops</h1>
       <div className="flex justify-center py-4">
         <Search
           search={search}
@@ -87,7 +87,8 @@ const Laptop = () => {
             description={laptop.description}
             image={laptop.img}
             price={laptop.price}
-            key={index}
+            key={laptop.id}
+            id={laptop.id}
           />
         ))}
       </div>

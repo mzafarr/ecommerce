@@ -1,13 +1,6 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
 
 const Sort = ({ sortOption, setSortOption }) => {
-
-
-  //   useEffect(() => {
-  //     handleSort();
-  //   }, [sortOption]);
-
   return (
     <select
       className="mx-4 rounded-lg p-2 cursor-pointer font-serif"

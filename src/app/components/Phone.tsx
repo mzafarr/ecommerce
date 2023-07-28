@@ -50,27 +50,26 @@ const Phone = () => {
     const priceA = parseInt(a.price.replace(/[^\d]/g, ""), 10);
     const priceB = parseInt(b.price.replace(/[^\d]/g, ""), 10);
 
-    return priceA - priceB;
+    return priceB - priceA;
   }
   function handleSort() {
     if (sortOption == "A") {
       filteredPhones.sort(compareByPriceAsc);
     } else if (sortOption == "D") {
-        filteredPhones.sort(compareByPriceDesc);
+      filteredPhones.sort(compareByPriceDesc);
     }
   }
-  useEffect(() => {
+  if (sortOption != "") {
     handleSort();
-  }, [sortOption]);
-
+  }
 
   useEffect(() => {
     handleSearch();
   }, [search, searchOption, sortOption]);
 
   return (
-    <div className="px-4">
-      <h1 className="text-4xl font-semibold py-4 text-center">Phones</h1>
+    <div className="px-4 py-6">
+      <h1 className="text-6xl font-semibold text-center py-6">Phones</h1>
       <div className="flex justify-center py-4">
         <Search
           search={search}
@@ -88,7 +87,8 @@ const Phone = () => {
             description={phone.description}
             price={phone.price}
             image={phone.img}
-            key={index}
+            key={phone.id}
+            id={phone.id}
           />
         ))}
       </div>
