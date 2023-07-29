@@ -1,9 +1,17 @@
+"use client"
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ShopContext } from "@/context/ShopContext";
 
 const Product = ({ name, price, description, image, id }) => {
-  const { addToCart } = useContext(ShopContext);
+  const { cartItems, addToCart } = useContext(ShopContext);
+
+// Save cart items to local storage whenever it changes
+useEffect(() => {
+
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}, [cartItems]);
+
   return (
     <div className="flex justify-between flex-col w-[300px] border px-6 py-3 rounded-xl m-4 ">
       <img className="w-44 mx-auto" src={image} alt="iphone" />
@@ -19,7 +27,7 @@ const Product = ({ name, price, description, image, id }) => {
           className="p-3 bg-yellow-400 rounded-md "
           onClick={() => addToCart(id)}
         >
-          Add to Cart
+          Add to Cart {cartItems[id]>0 ? `(${cartItems[id]})` : ""}
         </button>
       </>
     </div>

@@ -69,7 +69,7 @@ const Laptop = () => {
     handleSearch();
   }, [search, searchOption]);
   return (
-    <div className="px-4 py-6">
+    <div className="px-4 py-6 pb-20">
       <h1 className="text-6xl font-semibold text-center py-6">Laptops</h1>
       <div className="flex justify-center py-4">
         <Search

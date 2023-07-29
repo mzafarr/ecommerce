@@ -1,10 +1,8 @@
-"use client";
 import Link from "next/link";
 import React, { useState } from "react";
 import { products } from "./data";
 
 const Navbar = () => {
-  const [search, setSearch] = useState("");
 
   function handleSearch(search) {
     products.filter(
@@ -15,7 +13,7 @@ const Navbar = () => {
     );
   }
   return (
-    <nav className=" flex items-center gap-8 text-xl justify-between p-4 px-8 bg-gray-900 text-white">
+    <nav className=" flex items-center gap-8 text-xl justify-between p-4 px-16 bg-gray-900 text-white">
       <Link href={`/`}>
         <h3>TechArena</h3>
       </Link>

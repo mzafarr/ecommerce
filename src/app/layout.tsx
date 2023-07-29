@@ -2,7 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar";
-import ShopContextProvider from "@/context/ShopContext";
+import {ShopContextProvider} from "@/context/ShopContext";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <ShopContextProvider>
           <Navbar />
           {children}
+          <Footer/>
         </ShopContextProvider>
       </body>
     </html>
