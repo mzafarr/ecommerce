@@ -7,10 +7,8 @@ export default function Home() {
         <div className="main-text-phones pl-8">
           <h6>Laptops</h6>
           <p>A laptop is not just a device!</p>
-          <Link href={`/Laptops`}>
-            <a href="#" className="main-btn-phones">
-              Shop Now<i className="bx bx-right-arrow-alt"></i>
-            </a>
+          <Link href={`/Laptops`} className="main-btn-phones">
+            Shop Now<i className="bx bx-right-arrow-alt"></i>
           </Link>
         </div>
       </section>
@@ -19,10 +17,8 @@ export default function Home() {
         <div className="main-text-phones">
           <h6>Phones</h6>
           <p>A phone is not just a device!</p>
-          <Link href={`/Phones`}>
-            <a href="#" className="main-btn-phones">
-              Shop Now<i className="bx bx-right-arrow-alt"></i>
-            </a>
+          <Link href={`/Phones`} className="main-btn-phones">
+            Shop Now<i className="bx bx-right-arrow-alt"></i>
           </Link>
         </div>
       </section>
