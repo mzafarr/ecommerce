@@ -4,6 +4,10 @@ import React, { useContext, useEffect } from "react";
 import { products } from "../components/data";
 import { CartItem } from "../components/CartItem";
 
+function numberWithCommas(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const Cart = () => {
   const { cartItems, setCartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();  
@@ -22,7 +26,7 @@ useEffect(() => {
 }, [cartItems]);
 
   return (
-    <div className="cart">
+    <div className="cart min-h-[60vh]">
       <div>
         <h1 className="text-4xl font-semibold py-6">Your Cart Items</h1>
       </div>
@@ -34,12 +38,13 @@ useEffect(() => {
         })}
       </div>
       {totalAmount > 0 ? (
-        <div className="checkout ">
-          <p className="text-2xl py-6 pb-3"><b> Subtotal:</b> Rs. {totalAmount} </p>
+        <div className="checkout pb-20">
+          <p className="text-2xl py-6 pb-3"><b> Subtotal:</b> Rs. {numberWithCommas(totalAmount)} </p>
           {/* <button onClick={() => navigate("/")}> Continue Shopping </button> */}
           <button
             onClick={() => {
               checkout();
+              alert("order confirmed")
               // navigate("/checkout");
             }}
           >
@@ -48,7 +53,7 @@ useEffect(() => {
           </button>
         </div>
       ) : (
-        <h1 className="text-4xl font-medium py-6 pb-3"> Your Shopping Cart is Empty</h1>
+        <h1 className="text-3xl font-normal py-6 pb-3"> Your Shopping Cart is Empty</h1>
       )}
     </div>
   );

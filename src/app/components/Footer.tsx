@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <>
+    <div className="">
       <section className="contact border">
         <div className="contact-info">
           <div className="first-info">
@@ -63,7 +63,7 @@ const Footer = () => {
       <div className="end-text bg-gray-900">
         <p>Homepage designed by Taab :0</p>
       </div>
-    </>
+    </div>
   );
 };
 

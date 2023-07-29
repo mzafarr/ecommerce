@@ -2,6 +2,12 @@
 import { ShopContext } from "@/context/ShopContext";
 import React, { useContext } from "react";
 
+function numberWithCommas(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
+
 export const CartItem = (props) => {
   const { id, name, price, img, quantity } = props.product;
   const { cartItems, setCartItems, addToCart, removeFromCart, updateCartItemCount } =
@@ -15,7 +21,7 @@ export const CartItem = (props) => {
         <p>
           <b>{name}</b>
         </p>
-        <p> Price: {price}</p>
+        <p> Price: {numberWithCommas(price)}</p>
         <div className="countHandler pt-4">
           <button 
             className="text-2xl rounded-lg w-10 h-10 inline-flex justify-center items-center bg-slate-800 text-white"
