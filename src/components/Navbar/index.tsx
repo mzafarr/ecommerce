@@ -33,7 +33,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className=" flex items-center gap-8 text-xl justify-between p-4 px-16 bg-gray-100 border-b text-slate-900">
+    <nav className=" flex items-center gap-8 text-xl justify-between p-4 px-16 border-b shadow-lg bg-gray-200 text-slate-900">
       <Link href={`/`}>
         <h3>TechArena</h3>
       </Link>
@@ -45,7 +45,7 @@ const Navbar = () => {
                 className={`${
                   currentPath === link.href
                     ? "text-yellow-500"
-                    : "text-white hover:text-yellow-500"
+                    : "hover:text-yellow-500"
                 } transition-colors`}
               >
                 {link.label}
