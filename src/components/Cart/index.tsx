@@ -77,8 +77,8 @@ const Cart = () => {
     setTotalAmount(newTotalAmount);
   }, []);
 
-  const itemCount = cartItems.length;
   const fee = 1;
+  const itemCount = cartItems.length;
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
