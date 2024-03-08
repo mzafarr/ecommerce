@@ -3,10 +3,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cart from "../Cart";
 import { buttonVariants } from "../ui/button";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const currentPath = usePathname();
-  const userId = localStorage.getItem("userId");
+  const [userId, setUserId] = useState("");
   const links = [
     { href: "/", label: "Home" },
     { href: "/products/laptop", label: "Laptops" },
@@ -24,6 +25,12 @@ const Navbar = () => {
       console.error("Error signing out:", error);
     }
   };
+
+  useEffect(() => {
+    // Check for localStorage when component mounts (client-side)
+    const storedUserId = localStorage.getItem("userId");
+    setUserId(storedUserId);
+  }, []);
 
   return (
     <nav className=" flex items-center gap-8 text-xl justify-between p-4 px-16 bg-gray-900 text-white">
