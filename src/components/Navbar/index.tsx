@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import { UserDropDown } from "./UserDropDown";
 import { usePathname } from "next/navigation";
 import Cart from "../Cart";
+import { buttonVariants } from "../ui/button";
 
 const Navbar = () => {
   const currentPath = usePathname();
-
+  const userId = localStorage.getItem("userId");
   const links = [
     { href: "/", label: "Home" },
     { href: "/products/laptop", label: "Laptops" },
@@ -35,7 +35,15 @@ const Navbar = () => {
           );
         })}
         <Cart />
-        <UserDropDown />
+        {userId ? (
+          <Link href={"/signin"} className={buttonVariants()}>
+            Sign Out
+          </Link>
+        ) : (
+          <Link href={"/signin"} className={buttonVariants()}>
+            Sign In
+          </Link>
+        )}
       </div>
     </nav>
   );
