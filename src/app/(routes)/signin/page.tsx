@@ -76,7 +76,7 @@ export default function SignInForm() {
             </Button>
             <p className="mt-2 text-xs text-center text-gray-700">
               {" "}
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <a className="font-semibold hover:underline cursor-pointer">
                 Sign Up
               </a>

@@ -18,6 +18,37 @@ import { CartItem } from "./CartItem";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+
+async function checkout() {
+  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+  const stripePromise = loadStripe(publishableKey);
+  const products = JSON.parse(localStorage.getItem("cartItems"));
+
+  const createCheckOutSession = async () => {
+    if (!products) {
+      console.error("No products in the cart.");
+      return;
+    }
+    try {
+      const stripe = await stripePromise;
+      const checkoutSession = await axios.post("/api/create-stripe-session", {
+        products,
+      });
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.id,
+      });
+      localStorage.removeItem("cartItems");
+      localStorage.setItem("result", JSON.stringify(result));
+      if (result.error) {
+        console.error(result.error.message);
+      }
+    } catch (error) {
+      console.error("Error creating checkout session:", error.message);
+    }
+  };
+  createCheckOutSession();
+}
 
 const Cart = () => {
   //@ts-ignore
@@ -93,14 +124,14 @@ const Cart = () => {
 
               <SheetFooter>
                 <SheetTrigger asChild>
-                  <Link
-                    href="/checkout"
+                  <button
+                    onClick={checkout}
                     className={buttonVariants({
                       className: "w-full",
                     })}
                   >
                     Continue to Checkout
-                  </Link>
+                  </button>
                 </SheetTrigger>
               </SheetFooter>
             </div>
