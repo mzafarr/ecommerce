@@ -33,7 +33,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className=" flex items-center gap-8 text-xl justify-between p-4 px-16 bg-gray-900 text-white">
+    <nav className=" flex items-center gap-8 text-xl justify-between p-4 px-16 bg-gray-100 border-b text-slate-900">
       <Link href={`/`}>
         <h3>TechArena</h3>
       </Link>
