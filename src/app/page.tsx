@@ -12,61 +12,51 @@ export default function Home() {
   const [accessoriesData, setAccessoriesData] = useState([]);
 
   useEffect(() => {
-    const getFromDb = async () => {
+    const fetchData = async (category) => {
       try {
-        if (
-          localStorage.getItem("laptop") == null ||
-          JSON.parse(localStorage.getItem("laptop")).length === 0
-        ) {
-          const res = await axios.get(`/api/products?category=laptop&limit=6`);
-          setLaptopsData(res.data.products);
-        }
-        if (
-          localStorage.getItem("phone") == null ||
-          JSON.parse(localStorage.getItem("phone")).length === 0
-        ) {
-          const res = await axios.get(`/api/products?category=phone&limit=6`);
-          setPhonesData(res.data.products);
-        }
-        if (
-          localStorage.getItem("accessory") == null ||
-          JSON.parse(localStorage.getItem("accessory")).length === 0
-        ) {
+        const storedData = localStorage.getItem(category);
+
+        if (!storedData || JSON.parse(storedData).length === 0) {
           const res = await axios.get(
-            `/api/products?category=accessory&limit=6`
+            `/api/products?category=${category}&limit=6`
           );
-          setAccessoriesData(res.data.products);
+          return res.data.products;
+        }
+
+        return JSON.parse(storedData);
+      } catch (error) {
+        console.error(`Error fetching ${category} data:`, error);
+        return [];
+      }
+    };
+
+    const getData = async () => {
+      try {
+        const laptopsData = await fetchData("laptop");
+        if (laptopsData.length !== 0) {
+          localStorage.setItem("laptop", JSON.stringify(laptopsData));
+          setLaptopsData(laptopsData);
+        }
+
+        const phonesData = await fetchData("phone");
+        if (phonesData.length !== 0) {
+          localStorage.setItem("phone", JSON.stringify(phonesData));
+          setPhonesData(phonesData);
+        }
+
+        const accessoriesData = await fetchData("accessory");
+        if (accessoriesData.length !== 0) {
+          localStorage.setItem("accessory", JSON.stringify(accessoriesData));
+          setAccessoriesData(accessoriesData);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    const getData = async () => {
-      if (
-        localStorage.getItem("laptop") == null ||
-        localStorage.getItem("phone") == null ||
-        localStorage.getItem("accessory") == null ||
-        JSON.parse(localStorage.getItem("laptop")).length == 0 ||
-        JSON.parse(localStorage.getItem("phone")).length == 0 ||
-        JSON.parse(localStorage.getItem("accessory")).length == 0
-      ) {
-        console.log("-----1------")
-        await getFromDb();
-        laptopsData.length !== 0 &&
-          localStorage.setItem("laptop", JSON.stringify(laptopsData));
-        phonesData.length !== 0 &&
-          localStorage.setItem("phone", JSON.stringify(phonesData));
-        accessoriesData.length !== 0 &&
-          localStorage.setItem("accessory", JSON.stringify(accessoriesData));
-      } else {
-        console.log("-----2------")
-        setLaptopsData(JSON.parse(localStorage.getItem("laptop")));
-        setPhonesData(JSON.parse(localStorage.getItem("phone")));
-        setAccessoriesData(JSON.parse(localStorage.getItem("accessory")));
-      }
-    };
+
     getData();
   }, []);
+
   return (
     <div className="bg-gray-100 text-slate-900">
       <section className="lg:max-w-lg md:min-w-[700px] mx-auto p-12 flex flex-col md:flex-row items-center justify-between md:gap-10">
