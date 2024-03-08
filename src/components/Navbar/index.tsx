@@ -6,7 +6,7 @@ import { buttonVariants } from "../ui/button";
 
 const Navbar = () => {
   const currentPath = usePathname();
-  const userId = localStorage.getItem("userId");
+  // const userId = localStorage.getItem("userId");
   const links = [
     { href: "/", label: "Home" },
     { href: "/products/laptop", label: "Laptops" },
@@ -18,7 +18,7 @@ const Navbar = () => {
       await fetch("/api/auth/signout", {
         method: "POST",
       });
-      localStorage.removeItem("userId");
+      // localStorage.removeItem("userId");
       window.location.href = "/";
     } catch (error) {
       console.error("Error signing out:", error);
@@ -47,15 +47,15 @@ const Navbar = () => {
           );
         })}
         <Cart />
-        {userId ? (
+        {/* {userId ? (
           <button onClick={handleSignOut} className={buttonVariants()}>
             Sign Out
           </button>
-        ) : (
+        ) : ( */}
           <Link href={"/signin"} className={buttonVariants()}>
             Sign In
           </Link>
-        )}
+        {/* )} */}
       </div>
     </nav>
   );
