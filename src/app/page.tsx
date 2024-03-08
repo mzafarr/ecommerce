@@ -50,6 +50,7 @@ export default function Home() {
         JSON.parse(localStorage.getItem("phone")).length == 0 ||
         JSON.parse(localStorage.getItem("accessory")).length == 0
       ) {
+        console.log("-----1------")
         await getFromDb();
         laptopsData.length !== 0 &&
           localStorage.setItem("laptop", JSON.stringify(laptopsData));
@@ -58,6 +59,7 @@ export default function Home() {
         accessoriesData.length !== 0 &&
           localStorage.setItem("accessory", JSON.stringify(accessoriesData));
       } else {
+        console.log("-----2------")
         setLaptopsData(JSON.parse(localStorage.getItem("laptop")));
         setPhonesData(JSON.parse(localStorage.getItem("phone")));
         setAccessoriesData(JSON.parse(localStorage.getItem("accessory")));
