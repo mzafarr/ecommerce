@@ -13,6 +13,18 @@ const Navbar = () => {
     { href: "/products/phone", label: "Phones" },
   ];
 
+  const handleSignOut = async () => {
+    try {
+      await fetch("/api/auth/signout", {
+        method: "POST",
+      });
+      localStorage.removeItem("userId");
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   return (
     <nav className=" flex items-center gap-8 text-xl justify-between p-4 px-16 bg-gray-900 text-white">
       <Link href={`/`}>
@@ -36,9 +48,9 @@ const Navbar = () => {
         })}
         <Cart />
         {userId ? (
-          <Link href={"/signin"} className={buttonVariants()}>
+          <button onClick={handleSignOut} className={buttonVariants()}>
             Sign Out
-          </Link>
+          </button>
         ) : (
           <Link href={"/signin"} className={buttonVariants()}>
             Sign In
