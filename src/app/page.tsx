@@ -43,11 +43,11 @@ export default function Home() {
     };
     const getData = async () => {
       if (
-        localStorage.getItem("laptop") == null     ||
-        localStorage.getItem("phone") == null      ||
-        localStorage.getItem("accessory") == null  ||
+        localStorage.getItem("laptop") == null ||
+        localStorage.getItem("phone") == null ||
+        localStorage.getItem("accessory") == null ||
         localStorage.getItem("laptop").length == 0 ||
-        localStorage.getItem("phone").length == 0  ||
+        localStorage.getItem("phone").length == 0 ||
         localStorage.getItem("accessory").length == 0
       ) {
         await getFromDb();
@@ -67,8 +67,6 @@ export default function Home() {
   }, []);
   return (
     <div className="bg-gray-100 text-slate-900">
-          <Navbar />
-
       <section className="lg:max-w-lg md:min-w-[700px] mx-auto p-12 flex flex-col md:flex-row items-center justify-between md:gap-10">
         <div>
           <h1 className="text-3xl sm:text-4xl font-bold ">
