@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Product from "@/components/Common/Product";
 import { ProductSkeleton } from "@/components/Common/ProductSkeleton";
-import Navbar from "@/components/Navbar";
+
 export default function Home() {
   const [laptopsData, setLaptopsData] = useState([]);
   const [phonesData, setPhonesData] = useState([]);
@@ -16,21 +16,21 @@ export default function Home() {
       try {
         if (
           localStorage.getItem("laptop") == null ||
-          localStorage.getItem("laptop").length === 0
+          JSON.parse(localStorage.getItem("laptop")).length === 0
         ) {
           const res = await axios.get(`/api/products?category=laptop&limit=6`);
           setLaptopsData(res.data.products);
         }
         if (
           localStorage.getItem("phone") == null ||
-          localStorage.getItem("phone").length === 0
+          JSON.parse(localStorage.getItem("phone")).length === 0
         ) {
           const res = await axios.get(`/api/products?category=phone&limit=6`);
           setPhonesData(res.data.products);
         }
         if (
           localStorage.getItem("accessory") == null ||
-          localStorage.getItem("accessory").length === 0
+          JSON.parse(localStorage.getItem("accessory")).length === 0
         ) {
           const res = await axios.get(
             `/api/products?category=accessory&limit=6`
@@ -46,9 +46,9 @@ export default function Home() {
         localStorage.getItem("laptop") == null ||
         localStorage.getItem("phone") == null ||
         localStorage.getItem("accessory") == null ||
-        localStorage.getItem("laptop").length == 0 ||
-        localStorage.getItem("phone").length == 0 ||
-        localStorage.getItem("accessory").length == 0
+        JSON.parse(localStorage.getItem("laptop")).length == 0 ||
+        JSON.parse(localStorage.getItem("phone")).length == 0 ||
+        JSON.parse(localStorage.getItem("accessory")).length == 0
       ) {
         await getFromDb();
         laptopsData.length !== 0 &&
