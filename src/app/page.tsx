@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Product from "@/components/Common/Product";
 import { ProductSkeleton } from "@/components/Common/ProductSkeleton";
+import Navbar from "@/components/Navbar";
 export default function Home() {
   const [laptopsData, setLaptopsData] = useState([]);
   const [phonesData, setPhonesData] = useState([]);
@@ -66,6 +67,8 @@ export default function Home() {
   }, []);
   return (
     <div className="bg-gray-100 text-slate-900">
+          <Navbar />
+
       <section className="lg:max-w-lg md:min-w-[700px] mx-auto p-12 flex flex-col md:flex-row items-center justify-between md:gap-10">
         <div>
           <h1 className="text-3xl sm:text-4xl font-bold ">
