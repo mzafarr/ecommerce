@@ -13,15 +13,24 @@ export default function Home() {
   useEffect(() => {
     const getFromDb = async () => {
       try {
-        if (localStorage.getItem("laptop") !== null) {
+        if (
+          localStorage.getItem("laptop") == null ||
+          localStorage.getItem("laptop").length === 0
+        ) {
           const res = await axios.get(`/api/products?category=laptop&limit=6`);
           setLaptopsData(res.data.products);
         }
-        if (localStorage.getItem("phone") !== null) {
+        if (
+          localStorage.getItem("phone") == null ||
+          localStorage.getItem("phone").length === 0
+        ) {
           const res = await axios.get(`/api/products?category=phone&limit=6`);
           setPhonesData(res.data.products);
         }
-        if (localStorage.getItem("accessory") !== null) {
+        if (
+          localStorage.getItem("accessory") == null ||
+          localStorage.getItem("accessory").length === 0
+        ) {
           const res = await axios.get(
             `/api/products?category=accessory&limit=6`
           );
@@ -33,9 +42,12 @@ export default function Home() {
     };
     const getData = async () => {
       if (
-        localStorage.getItem("laptop") === null ||
-        localStorage.getItem("phone") === null ||
-        localStorage.getItem("accessory") === null
+        localStorage.getItem("laptop") == null     ||
+        localStorage.getItem("phone") == null      ||
+        localStorage.getItem("accessory") == null  ||
+        localStorage.getItem("laptop").length == 0 ||
+        localStorage.getItem("phone").length == 0  ||
+        localStorage.getItem("accessory").length == 0
       ) {
         await getFromDb();
         laptopsData.length !== 0 &&
