@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PaymentType {
+  CARD
+  COD
+}
+
+enum Status {
+  PENDING
+  COMPLETED
+  CANCELLED
+  DELIVERED
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  name          String?
+  password      String
+  orders        Order[]
+  CartItems     CartItem[]
+  WishlistItems WishlistItem[]
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now())
+  orderItems  OrderItem[]
+  status      Status      @default(PENDING)
+  paymentType PaymentType
+  user        User        @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  quantity  Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   Int
+}
+
+//npx prisma migrate dev
+model Product {
+  id            Int            @id @default(autoincrement())
+  name          String
+  description   String
+  price         Float
+  quantity      Int
+  category      String
+  images        Image[]
+  orderItems    OrderItem[]
+  CartItems     CartItem[]
+  WishlistItems WishlistItem[]
+}
+
+model Image {
+  id        Int     @id @default(autoincrement())
+  url       String
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  quantity  Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model WishlistItem {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+}
