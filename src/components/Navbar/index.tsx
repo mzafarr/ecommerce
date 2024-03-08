@@ -6,7 +6,7 @@ import { buttonVariants } from "../ui/button";
 
 const Navbar = () => {
   const currentPath = usePathname();
-  // const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem("userId");
   const links = [
     { href: "/", label: "Home" },
     { href: "/products/laptop", label: "Laptops" },
@@ -47,15 +47,15 @@ const Navbar = () => {
           );
         })}
         <Cart />
-        {/* {userId ? (
+        {userId ? (
           <button onClick={handleSignOut} className={buttonVariants()}>
             Sign Out
           </button>
-        ) : ( */}
+        ) : (
           <Link href={"/signin"} className={buttonVariants()}>
             Sign In
           </Link>
-        {/* )} */}
+        )}
       </div>
     </nav>
   );
