@@ -20,19 +20,18 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 
-
 const Cart = () => {
   //@ts-ignore
   // const state = useSelector((state) => state.user);
   // const [cartItems, setCartItems] = useState(state.cartItems);
-  
+
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
-  
+
   async function checkout() {
     const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
     const stripePromise = loadStripe(publishableKey);
-  
+
     const createCheckOutSession = async () => {
       if (!cartItems) {
         console.error("No cartItems in the cart.");
@@ -65,20 +64,23 @@ const Cart = () => {
       localStorage.setItem("cartItems", JSON.stringify(res.data.cartItems));
     }
     // if (state.cartItems.length === 0) {
-    if (localStorage.getItem("cartItems") === null) {
+    if (
+      localStorage.getItem("cartItems") === undefined &&
+      !localStorage.getItem("token") 
+    ) {
       getCartItems();
     } else {
       setCartItems(JSON.parse(localStorage.getItem("cartItems")));
     }
-    let newTotalAmount = 0;
-    for (let i = 0; i < cartItems.length; i++) {
+    let newTotalAmount = 0, n = cartItems?.length || 0;
+    for (let i = 0; i < n; i++) {
       newTotalAmount += cartItems[i]?.product?.price * cartItems[i]?.quantity;
     }
     setTotalAmount(newTotalAmount);
   }, []);
 
   const fee = 1;
-  const itemCount = cartItems.length;
+  const itemCount = cartItems?.length || 0;
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {

@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   const redirectURL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://google.com";
+      : "https://ecommerce-black-rho.vercel.app";
 
   const transformedProducts = products.map((product) => {
     return {

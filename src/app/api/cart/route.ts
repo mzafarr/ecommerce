@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const cookieStore = cookies();
-    const token = cookieStore.get("token").value;
+    const token = cookieStore.get("token")?.value;
 
     if (!token) {
       return NextResponse.redirect(`${URL}/signin`);
