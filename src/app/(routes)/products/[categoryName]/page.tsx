@@ -13,25 +13,29 @@ const ProductPage = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const params = useParams<{ categoryName: string }>();
 
-  useEffect(() => {
-    async function getProductsFromDB() {
+  async function getProductsFromDB(categoryName) {
+    try {
       const res = await axios.get("/api/products", {
         params: {
           searchQuery: search,
-          category: params.categoryName,
+          category: categoryName,
         },
       });
-      setFilteredProducts(res.data.products);
-      localStorage.setItem(
-        params.categoryName,
-        JSON.stringify(res.data.products)
-      );
+      const products = res.data.products;
+      setFilteredProducts(products);
+      localStorage.setItem(categoryName, JSON.stringify(products));
+    } catch (error) {
+      console.error("Error fetching products from the database:", error);
     }
-    if (params.categoryName !== undefined) {
+  }
+
+  useEffect(() => {
+    if (params.categoryName) {
       const storedData = localStorage.getItem(params.categoryName);
       const parsedData = JSON.parse(storedData);
+
       if (!storedData || parsedData.length === 0) {
-        getProductsFromDB();
+        getProductsFromDB(params.categoryName);
       } else {
         setFilteredProducts(parsedData);
       }
