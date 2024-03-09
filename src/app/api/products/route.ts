@@ -6,10 +6,10 @@ export async function GET(req: NextRequest) {
   try {
     const searchParams = req.nextUrl.searchParams;
     const searchQuery = searchParams.get("searchQuery"); // nullable
-    const category = searchParams.get("category");      // nullable
+    const category = searchParams.get("category"); // nullable
     const limit = parseInt(searchParams.get("limit")); // nullable
     let products;
-    
+
     // Create the where clause based on searchQuery and category
     const whereClause: any = {};
     if (searchQuery) {
@@ -23,6 +23,11 @@ export async function GET(req: NextRequest) {
     if (limit && !isNaN(limit) && limit > 0) {
       products = await db.product.findMany({
         where: whereClause,
+        include: {
+          images: {
+            take: 1,
+          },
+        },
         take: limit,
       });
     } else {
