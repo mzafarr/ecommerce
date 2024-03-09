@@ -6,7 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 
 const Product = ({ product, category }) => {
-  const { name, price, description, image, id } = product;
+  const { name, price, description, images, id } = product;
   // const dispatch = useDispatch();
 
   async function handleAddToCart() {
@@ -28,7 +28,7 @@ const Product = ({ product, category }) => {
   return (
     <>
       <div className="flex justify-between flex-col w-[300px] border px-6 py-3 rounded-xl m-4 ">
-        <img className="w-44 mx-auto" src={image} alt={name} />
+        <img className="w-44 mx-auto" src={images[0].url} alt={name} />
         <>
           <div className="flex justify-center flex-col">
             <Link href={`/product/${id}&category=${category}`}>
