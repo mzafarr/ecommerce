@@ -63,9 +63,10 @@ const Cart = () => {
       setCartItems(res.data.cartItems);
       localStorage.setItem("cartItems", JSON.stringify(res.data.cartItems));
     }
+    console.log(`localStorage.getItem("cartItems")`, localStorage.getItem("cartItems"))
     // if (state.cartItems.length === 0) {
     if (
-      localStorage.getItem("cartItems") === undefined &&
+      localStorage.getItem("cartItems") === null &&
       !localStorage.getItem("token") 
     ) {
       getCartItems();

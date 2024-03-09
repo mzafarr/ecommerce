@@ -30,12 +30,12 @@ const ProductPage = () => {
   }
 
   useEffect(() => {
-    if (params.categoryName) {
+    if (params?.categoryName) {
       const storedData = localStorage.getItem(params.categoryName);
       const parsedData = JSON.parse(storedData);
 
-      if (!storedData || parsedData.length === 0) {
-        getProductsFromDB(params.categoryName);
+      if (!storedData || parsedData?.length === 0) {
+        getProductsFromDB(params?.categoryName);
       } else {
         setFilteredProducts(parsedData);
       }
@@ -68,14 +68,14 @@ const ProductPage = () => {
   return (
     <div className="px-4 py-6 pb-20">
       <h1 className="text-6xl font-semibold text-center py-6">
-        {params.categoryName}
+        {params?.categoryName}
       </h1>
       <div className="flex justify-center py-4">
         <Search search={search} setSearch={setSearch} />
         <Sort sortOption={sortOption} setSortOption={setSortOption} />
       </div>
       <div className="flex flex-wrap">
-        {filteredProducts.length > 0
+        {filteredProducts?.length > 0
           ? filteredProducts.map((product, index) => (
               <Product
                 product={product}
