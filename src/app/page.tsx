@@ -22,7 +22,6 @@ export default function Home() {
           );
           return res.data.products;
         }
-
         return JSON.parse(storedData);
       } catch (error) {
         console.error(`Error fetching ${category} data:`, error);

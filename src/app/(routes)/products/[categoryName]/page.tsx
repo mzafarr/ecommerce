@@ -28,12 +28,12 @@ const ProductPage = () => {
       );
     }
     if (params.categoryName !== undefined) {
-      if (localStorage.getItem(params.categoryName) !== null) {
-        setFilteredProducts(
-          JSON.parse(localStorage.getItem(params.categoryName) || "[]")
-        );
-      } else {
+      const storedData = localStorage.getItem(params.categoryName);
+      const parsedData = JSON.parse(storedData);
+      if (!storedData || parsedData.length === 0) {
         getProductsFromDB();
+      } else {
+        setFilteredProducts(parsedData);
       }
     }
   }, []);
