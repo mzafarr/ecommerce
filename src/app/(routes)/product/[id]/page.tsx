@@ -31,7 +31,7 @@ const ProductPage = ({ params }: any) => {
       {/* <div className="border rounded-xl p-6"> */}
       <img
         className="md:w-96 w-64 max-w-[95vw]"
-        src={product?.images[0].url}
+        src={`${product?.images[0].url}`}
         alt="iphone"
       />
       {/* </div> */}
