@@ -28,7 +28,9 @@ const Product = ({ product, category }) => {
   return (
     <>
       <div className="flex justify-between flex-col w-[300px] border px-6 py-3 rounded-xl m-4 ">
-        <img className="w-44 mx-auto" src={`${images[0].url}`} alt={name} />
+      <div className="w-48 h-48 overflow-hidden">
+        <img className="w-full h-full object-cover mx-auto" src={`${images[0].url}`} alt={name} />
+        </div>
         <>
           <div className="flex justify-center flex-col">
             <Link href={`/product/${id}&category=${category}`}>
