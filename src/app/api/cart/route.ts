@@ -47,7 +47,8 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { productId, newQuantity } = body;
+    const { productId, quantity } = body;
+    const newQuantity = quantity;
     const cookieStore = cookies();
     const token = cookieStore.get("token").value;
     // console.log("productId", productId, "quantity", quantity, "token", token);

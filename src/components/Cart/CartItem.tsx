@@ -8,14 +8,18 @@ import { useEffect, useState } from "react";
 
 export const CartItem = (props) => {
   console.log(props);
-  const { id, productId, userId, quantity, product } = props.cartItem;
   const {
+    id,
+    productId,
+    userId,
+    quantity,
     name = "",
     description = "",
     price = "",
     images = "",
     category = "",
-  } = product || {};
+  } = props.cartItem;
+
   const [quantityState, setQuantityState] = useState(quantity);
   let products = [];
   //@ts-ignore
@@ -31,7 +35,7 @@ export const CartItem = (props) => {
     setQuantityState(newQuantity);
     const cartItems = localStorage.getItem("cartItems");
     if (isIncreaseQuantity) {
-      const newCart = [...JSON.parse(cartItems), product];
+      const newCart = [...JSON.parse(cartItems), { ...props.cartItem }];
       localStorage.setItem("cartItems", JSON.stringify(newCart));
     } else {
       const newCart = JSON.parse(cartItems).filter((item) => item.id !== id);
@@ -46,7 +50,7 @@ export const CartItem = (props) => {
     <div className="max-w-full mx-auto rounded-lg m-4 border p-4 text-black flex items-center gap-6">
       <div className="relative aspect-square h-24 w-24 min-w-fit overflow-hidden rounded">
         <Image
-          src={"/img/iphone14.jpeg"}
+          src={`${images[0]?.url || "/img/iphone14.jpeg"}`}
           // className="mx-auto"
           fill
           alt="product image"

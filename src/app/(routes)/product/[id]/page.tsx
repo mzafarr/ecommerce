@@ -14,7 +14,7 @@ const ProductPage = ({ params }: any) => {
   async function handleAddToCart() {
     await axios.post("/api/cart", {
       productId: id,
-      quantity: selectedQuantity,
+      quantity: selectedQuantity || 1,
     });
     const cartItems = localStorage.getItem("cartItems");
     if (cartItems) {

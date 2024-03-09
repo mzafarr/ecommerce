@@ -55,10 +55,10 @@ const ProductPage = () => {
   }
 
   function handleSort() {
-    if (sortOption == "A") {
-      filteredProducts?.sort();
-    } else if (sortOption == "D") {
-      filteredProducts?.sort().reverse();
+    if (sortOption === "A") {
+      setFilteredProducts([...filteredProducts].sort());
+    } else if (sortOption === "D") {
+      setFilteredProducts([...filteredProducts].sort().reverse());
     }
   }
   if (sortOption != "") {
