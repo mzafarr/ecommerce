@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { ShoppingCart } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -69,9 +70,13 @@ const ProductPage = ({ params }: any) => {
           </div>
           <button
             onClick={handleAddToCart}
-            className="p-3 py-2 bg-yellow-400 rounded-md font-medium"
+            className="p-3 py-2 bg-yellow-400 rounded-md font-medium  flex gap-2 justify-center"
           >
-            Add to Cart
+            <ShoppingCart
+              aria-hidden="true"
+              className="h-6 w-6 flex-shrink-0 text-gray-800 group-hover:text-gray-500"
+            />{" "}
+            <span> Add to Cart</span>
           </button>
         </div>
       </div>

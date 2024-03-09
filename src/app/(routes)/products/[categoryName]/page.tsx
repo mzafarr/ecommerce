@@ -11,6 +11,7 @@ const ProductPage = () => {
   const [search, setSearch] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const params = useParams<{ categoryName: string }>();
 
   async function getProductsFromDB(categoryName) {
@@ -23,13 +24,14 @@ const ProductPage = () => {
       });
       const products = res?.data?.products;
       setFilteredProducts(products);
+      setAllProducts(products);
     } catch (error) {
       console.error("Error fetching products from the database:", error);
     }
   }
 
   useEffect(() => {
-    if (params?.categoryName) {
+    if (allProducts.length === 0) {
       getProductsFromDB(params?.categoryName);
     }
   }, []);
@@ -40,7 +42,7 @@ const ProductPage = () => {
 
   function handleSearch() {
     setFilteredProducts(
-      filteredProducts?.filter((product: any) =>
+      allProducts?.filter((product: any) =>
         product.name.toLowerCase().includes(search)
       )
     );
@@ -58,15 +60,15 @@ const ProductPage = () => {
   }
 
   return (
-    <div className="px-4 py-6 pb-20">
+    <div className="w-screen mx-auto px-4 py-6 pb-20">
       <h1 className="text-6xl font-semibold text-center py-6">
         {params?.categoryName}
       </h1>
-      <div className="flex justify-center py-4">
+      <div className="flex justify-center mx-auto py-4 w-screen">
         <Search search={search} setSearch={setSearch} />
         <Sort sortOption={sortOption} setSortOption={setSortOption} />
       </div>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap mx-auto w-screen">
         {filteredProducts?.length > 0
           ? filteredProducts.map((product, index) => (
               <Product

@@ -3,6 +3,7 @@
 // import { useDispatch } from "react-redux";
 // import { addToCart } from "@/lib/redux/userSlice";
 import axios from "axios";
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 const Product = ({ product, category }) => {
@@ -38,10 +39,10 @@ const Product = ({ product, category }) => {
             <p className="font-semibold py-2 text-lg">$ {price}</p>
           </div>
           <button
-            className="p-3 bg-yellow-400 rounded-md "
+            className="p-3 bg-yellow-400 rounded-md"
             onClick={handleAddToCart}
           >
-            Add to Cart
+           Add to Cart
           </button>
         </>
       </div>
