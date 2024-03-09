@@ -21,7 +21,7 @@ const ProductPage = () => {
           category: categoryName,
         },
       });
-      const products = res.data.products;
+      const products = res?.data?.products;
       setFilteredProducts(products);
       localStorage.setItem(categoryName, JSON.stringify(products));
     } catch (error) {
