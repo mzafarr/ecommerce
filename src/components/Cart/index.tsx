@@ -75,7 +75,7 @@ const Cart = () => {
     }
     let newTotalAmount = 0, n = cartItems?.length || 0;
     for (let i = 0; i < n; i++) {
-      newTotalAmount += cartItems[i]?.product?.price * cartItems[i]?.quantity;
+      newTotalAmount += cartItems[i]?.price * cartItems[i]?.quantity;
     }
     setTotalAmount(newTotalAmount);
   }, []);
@@ -121,7 +121,7 @@ const Cart = () => {
                 </div>
                 <div className="flex">
                   <span className="flex-1">Total</span>
-                  <span>$ {numberWithCommas(totalAmount + fee)}</span>
+                  <span>$ {numberWithCommas(totalAmount)}</span>
                 </div>
               </div>
 

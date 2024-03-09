@@ -23,7 +23,6 @@ const ProductPage = () => {
       });
       const products = res?.data?.products;
       setFilteredProducts(products);
-      localStorage.setItem(categoryName, JSON.stringify(products));
     } catch (error) {
       console.error("Error fetching products from the database:", error);
     }
@@ -31,14 +30,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     if (params?.categoryName) {
-      const storedData = localStorage.getItem(params.categoryName);
-      const parsedData = JSON.parse(storedData);
-
-      if (!storedData || parsedData?.length === 0) {
-        getProductsFromDB(params?.categoryName);
-      } else {
-        setFilteredProducts(parsedData);
-      }
+      getProductsFromDB(params?.categoryName);
     }
   }, []);
 

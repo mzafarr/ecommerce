@@ -33,6 +33,11 @@ export async function GET(req: NextRequest) {
     } else {
       products = await db.product.findMany({
         where: whereClause,
+        include: {
+          images: {
+            take: 1,
+          },
+        },
       });
     }
     return NextResponse.json({ products }, { status: 200 });
