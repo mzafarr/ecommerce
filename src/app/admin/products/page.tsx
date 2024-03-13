@@ -21,7 +21,7 @@ export type Product = {
   images: { url: string }[];
 };
 
-export default function page() {
+export default function Page() {
   const [products, setProducts] = useState<Product[] | undefined>([]);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
