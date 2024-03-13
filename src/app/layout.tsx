@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Provider } from "react-redux";
 import store from "@/lib/redux/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ReactQueryProvider from "./react-query-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {/* <Provider store={store}> */}
+
+        <ReactQueryProvider>
           <Navbar />
           {children}
+        </ReactQueryProvider>
         {/* </Provider> */}
       </body>
     </html>
