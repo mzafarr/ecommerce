@@ -164,18 +164,20 @@ export default function CreateProduct({
       // setImage("");
       onClose(false);
       queryClient.invalidateQueries(["products"]);
-      return toast({
-        variant: "success",
-        title: "Success",
-        description: "Product Added Successfully",
-      });
+      // return toast({
+      //   variant: "success",
+      //   title: "Success",
+      //   description: "Product Added Successfully",
+      // });
     },
     onError: (error) => {
-      return toast({
-        title: "Error",
-        description: `${error}`,
-        variant: "destructive",
-      });
+      // return toast({
+      //   title: "Error",
+      //   description: `${error}`,
+      //   variant: "destructive",
+      // });
+      console.log("error", error)
+
     },
   });
 
@@ -188,44 +190,45 @@ export default function CreateProduct({
       // setImage("");
       onClose(false);
       queryClient.invalidateQueries(["products"]);
-      return toast({
-        variant: "success",
-        title: "Success",
-        description: "Product Updated Successfully",
-      });
+      // return toast({
+      //   variant: "success",
+      //   title: "Success",
+      //   description: "Product Updated Successfully",
+      // });
     },
     onError: (error) => {
-      return toast({
-        title: "Error",
-        description: `${error}`,
-        variant: "destructive",
-      });
+      // return toast({
+      //   title: "Error",
+      //   description: `${error}`,
+      //   variant: "destructive",
+      // });
+      console.log("error", error)
     },
   });
 
   const onSubmit = useCallback(
     async (data: z.infer<typeof schema>) => {
-      if (
-        existingProducts.some(
-          (product) =>
-            product.name.toLowerCase() === data.name.toLowerCase() &&
-            product.id !== data.id
-        )
-      ) {
-        return toast({
-          title: "Error",
-          description: "Product with this name already exists",
-          variant: "destructive",
-        });
-      }
-      if (product) {
-        updateProductMutation.mutate(data);
-        // updateProductMutation.mutate(data as UpdateProductdto);
-      } else {
-        console.log(data);
-        createProductMutation.mutate(data);
-        // createProductMutation.mutate(data as CreateProductdto);
-      }
+      // if (
+      //   existingProducts.some(
+      //     (product) =>
+      //       product.name.toLowerCase() === data.name.toLowerCase() &&
+      //       product.id !== data.id
+      //   )
+      // ) {
+      //   return toast({
+      //     title: "Error",
+      //     description: "Product with this name already exists",
+      //     variant: "destructive",
+      //   });
+      // }
+      // if (product) {
+      //   updateProductMutation.mutate(data);
+      //   // updateProductMutation.mutate(data as UpdateProductdto);
+      // } else {
+      //   console.log(data);
+      //   createProductMutation.mutate(data);
+      //   // createProductMutation.mutate(data as CreateProductdto);
+      // }
     },
     [createProductMutation, updateProductMutation, product]
   );

@@ -26,16 +26,20 @@ export default function DeleteProductDialog({
     // return await productControllerDelete(id);
     return await axios.delete(`/api/products/${id}`);
   }, []);
-
+  type ToastProps = {
+    variant: string;
+    title: string;
+    description: string;
+  };
   const deleteProductMutation = useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => {
       onClose(false);
-      return toast({
-        variant: "success",
-        title: "Success",
-        description: "Product successfully deleted",
-      });
+      // return toast({
+      //   variant: "success",
+      //   title: "Success",
+      //   description: "Product successfully deleted",
+      // });
     },
   });
 
