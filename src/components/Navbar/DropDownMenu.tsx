@@ -26,6 +26,7 @@ export function DropDownMenu({ links, userId, handleSignOut }: any) {
                   className="bg-slate-800 border-b border-opacity-10 rounded-none m-0 text-white"
                   href={link.href}
                   title={link.label}
+                  key={link.href}
                 />
               ))}
             {userId ? (
