@@ -68,7 +68,7 @@ const ProductPage = () => {
         <Search search={search} setSearch={setSearch} />
         <Sort sortOption={sortOption} setSortOption={setSortOption} />
       </div>
-      <div className="flex flex-wrap mx-auto w-screen">
+      <div className="flex flex-wrap justify-center items-center mx-auto w-screen">
         {filteredProducts?.length > 0
           ? filteredProducts.map((product, index) => (
               <Product

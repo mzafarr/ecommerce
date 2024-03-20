@@ -4,12 +4,12 @@ import { usePathname } from "next/navigation";
 import Cart from "../Cart";
 import { buttonVariants } from "../ui/button";
 import { useEffect, useState } from "react";
+import { DropDownMenu } from "./DropDownMenu";
 
 const Navbar = () => {
   const currentPath = usePathname();
   const [userId, setUserId] = useState("");
   const links = [
-    { href: "/", label: "Home" },
     { href: "/products/laptop", label: "Laptops" },
     { href: "/products/phone", label: "Phones" },
     { href: "/products/accessories", label: "Accessories" },
@@ -41,7 +41,7 @@ const Navbar = () => {
       <div className="flex items-center gap-8">
         {links.map((link) => {
           return (
-            <Link href={link.href} key={link.href}>
+            <Link className="hidden md:block" href={link.href} key={link.href}>
               <span
                 // className={`${
                 //   currentPath === link.href
@@ -55,16 +55,30 @@ const Navbar = () => {
             </Link>
           );
         })}
+        <div className="md:hidden">
+          <DropDownMenu
+            links={links}
+            userId={userId}
+            handleSignOut={handleSignOut}
+          />
+        </div>
         <Cart />
-        {userId ? (
-          <button onClick={handleSignOut} className={buttonVariants()}>
-            Sign Out
-          </button>
-        ) : (
-          <Link href={"/signin"} className={"bg-yellow-500 text-slate-600 p-2.5 px-4 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"}>
-            Sign In
-          </Link>
-        )}
+        <div className="hidden md:block">
+          {userId ? (
+            <button onClick={handleSignOut} className={buttonVariants()}>
+              Sign Out
+            </button>
+          ) : (
+            <Link
+              href={"/signin"}
+              className={
+                "bg-yellow-500 text-slate-600 p-2.5 px-4 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              }
+            >
+              Sign In
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );
